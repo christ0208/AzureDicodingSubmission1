@@ -1,7 +1,9 @@
 <?php
+    require '../configuration/mssql-config.php';
+    require '../helper/mssql-helper.php';
     require '../controller/ProjectController.php';
 
-    $projectController = new ProjectController();
+    $projectController = new ProjectController($conn);
 
     if(isset($_POST['insert']))
     {

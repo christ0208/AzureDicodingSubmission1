@@ -12,5 +12,6 @@
 
     if(!$conn)
     {
-        die('Connection Problem ' . sqlsrv_errors());
+        var_dump(sqlsrv_errors());
+        die('Connection Problem ');
     }

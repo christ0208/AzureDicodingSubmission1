@@ -26,6 +26,24 @@
 
         function insert($request)
         {
-            $insertQuery = "INSERT INTO tblProject(name, price) VALUES ()";
+            $insertQuery = "INSERT INTO tblProject(name, price) VALUES (?,?)";
+            $prepQuery = sqlsrv_prepare(
+                $this->conn,
+                $insertQuery,
+                array(&$request['project-name'], &$request['project-price'])
+            );
+
+            if (!$prepQuery) {
+                die(sqlsrv_errors());
+            }
+
+            $result = sqlsrv_execute($prepQuery);
+            if ($result === false)
+            {
+                die(sqlsrv_errors());
+            }
+
+            $_SESSION['message'] = 'Success';
+            header('Location:/views/form.php');
         }
     }
